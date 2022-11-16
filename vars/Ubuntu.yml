@@ -1,0 +1,7 @@
+# Ubuntu generic vars
+---
+package_list:
+  - apache2
+  - ubuntu_specific_package
+
+variable: value

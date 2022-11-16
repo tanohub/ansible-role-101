@@ -1,0 +1,7 @@
+# CentOS generic vars
+---
+package_list:
+  - httpd    
+  - centos_specific_package
+
+variable: value

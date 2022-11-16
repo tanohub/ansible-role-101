@@ -1,0 +1,23 @@
+---
+# tasks file for ansible-role-101
+
+# load OS-specific variables an tasks, first found, ex:
+#  "Ubuntu-22.yml" | "CentOS-7.yml" | ansible_distribution+ansible_distribution_version
+#  "Ubuntu.yml"    | "CentOS.yml"   | ansible_distribution
+#  "Debian.yml"    | "RedHat.yml"   | ansible_os_family
+
+- name: "Include {{ ansible_distribution }} variables"
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+    - vars_default.yml
+
+- name: "Include {{ ansible_distribution }} tasks"
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+    - tasks_default.yml
